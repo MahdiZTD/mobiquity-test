@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mobiquity.base.BaseViewHolder
 import com.mobiquity.databinding.ItemCategoryBinding
 import com.mobiquity.datamodel.CategoryModel
+import com.mobiquity.datamodel.Product
 
 /**
  * Created by Mahdi Zare Tahghigh Doost on 3/3/2020.
@@ -14,6 +15,7 @@ import com.mobiquity.datamodel.CategoryModel
  */
 class ProductListAdapter(var categories:MutableList<CategoryModel>) : RecyclerView.Adapter<ProductListAdapter.CategoryViewHolder>() {
 
+    var clickListener: OnItemClicked? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         return CategoryViewHolder(ItemCategoryBinding.inflate(LayoutInflater.from(parent.context),parent,false))
@@ -43,8 +45,12 @@ class ProductListAdapter(var categories:MutableList<CategoryModel>) : RecyclerVi
 
         override fun onBind(position: Int) {
             mBinding.vm = ProductItemViewModel(categories[position])
-            mBinding.rvProducts.adapter = SubItemAdapter(categories[position].products)
+            mBinding.rvProducts.adapter = SubItemAdapter(categories[position].products,clickListener)
             mBinding.executePendingBindings()
         }
+    }
+
+    interface OnItemClicked{
+        fun onItemClicked(product:Product)
     }
 }

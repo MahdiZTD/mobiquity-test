@@ -8,4 +8,16 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MyTextView" parent="TextAppearance.AppCompat">
+    </style>
+
+    <style name="MyTextView.Title">
+        <item name="android:textColor">@color/md_black</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+    <style name="MyTextView.Title.Sub">
+        <item name="android:textColor">@color/md_grey_600</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
 </resources>

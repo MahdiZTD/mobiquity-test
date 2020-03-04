@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.mobiquity.base.BaseViewModel
 import com.mobiquity.datamodel.CategoryModel
 import com.mobiquity.network.ApiHelper
+import com.mobiquity.utils.SchedulersProvider
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -16,7 +17,7 @@ import io.reactivex.schedulers.Schedulers
  * mahdiZTD@gmail.com
  */
 
-class ProductListViewModel(var apiHelper: ApiHelper) : BaseViewModel<ProductListNavigator>() {
+class ProductListViewModel(var apiHelper: ApiHelper,var schedulersProvider: SchedulersProvider) : BaseViewModel<ProductListNavigator>() {
 
     val categories: ObservableList<CategoryModel> = ObservableArrayList<CategoryModel>()
     val categoryLiveData: MutableLiveData<MutableList<CategoryModel>> = MutableLiveData()
@@ -25,8 +26,8 @@ class ProductListViewModel(var apiHelper: ApiHelper) : BaseViewModel<ProductList
     fun getProducts() {
         compositeDisposable.add(
             apiHelper.getProductList()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+                .observeOn(schedulersProvider.ui())
+                .subscribeOn(schedulersProvider.io())
                 .subscribe(
                     {
                         categoryLiveData.value = it

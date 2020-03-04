@@ -1,5 +1,6 @@
 package com.mobiquity.productlist
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
@@ -8,6 +9,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.mobiquity.R
 import com.mobiquity.base.BaseActivity
 import com.mobiquity.databinding.ActivityProductListBinding
+import com.mobiquity.datamodel.Product
+import com.mobiquity.productdetail.ProductDetailActivity
 import com.mobiquity.productlist.adpter.ProductListAdapter
 import javax.inject.Inject
 
@@ -18,7 +21,7 @@ import javax.inject.Inject
  */
 
 class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductListViewModel>(),
-    ProductListNavigator {
+    ProductListNavigator, ProductListAdapter.OnItemClicked {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -40,6 +43,7 @@ class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductList
         super.onCreate(savedInstanceState)
         mViewModel.setNavigator(this)
 
+        adapter.clickListener = this
         viewDataBinding.rvCategories.adapter = adapter
 
         mViewModel.categoryLiveData.observe(this , Observer {
@@ -51,5 +55,11 @@ class ProductListActivity : BaseActivity<ActivityProductListBinding, ProductList
 
         mViewModel.getProducts()
 
+    }
+
+    override fun onItemClicked(product: Product) {
+        val intent = Intent(this,ProductDetailActivity::class.java)
+        intent.putExtra("product",product)
+        startActivity(intent)
     }
 }

@@ -8,8 +8,12 @@ import com.mobiquity.datamodel.Product
  * SnappQ
  * mahdiZTD@gmail.com
  */
-class SubItemViewModel(var product:Product) {
+class SubItemViewModel(var product:Product,var listener:ProductListAdapter.OnItemClicked?) {
     var productName = ObservableField<String>(product.name)
     var productPrice = ObservableField<String>("${product.salePrice.amount} ${product.salePrice.currency}")
     var productImage = ObservableField<String>(product.url)
+
+    fun onProductClicked(){
+        listener?.onItemClicked(product)
+    }
 }

@@ -12,7 +12,7 @@ import com.mobiquity.datamodel.Product
  * SnappQ
  * mahdiZTD@gmail.com
  */
-class SubItemAdapter(var products: MutableList<Product>) :
+class SubItemAdapter(var products: MutableList<Product>,var listener:ProductListAdapter.OnItemClicked?) :
     RecyclerView.Adapter<SubItemAdapter.SubItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubItemViewHolder {
@@ -33,24 +33,12 @@ class SubItemAdapter(var products: MutableList<Product>) :
         holder.onBind(position)
     }
 
-    fun addItems(products: MutableList<Product>) {
-        this.products.clear()
-        this.products.addAll(products)
-        notifyDataSetChanged()
-    }
-
-    fun clearItems() {
-        this.products.clear()
-        notifyDataSetChanged()
-    }
-
     inner class SubItemViewHolder(var mBinding: ItemProductBinding) :
         BaseViewHolder(mBinding.root) {
         override fun onBind(position: Int) {
-            mBinding.vm = SubItemViewModel(products[position])
+            mBinding.vm = SubItemViewModel(products[position],listener)
             mBinding.executePendingBindings()
         }
     }
-
 
 }

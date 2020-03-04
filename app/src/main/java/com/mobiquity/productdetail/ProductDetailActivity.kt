@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.mobiquity.R
 import com.mobiquity.base.BaseActivity
 import com.mobiquity.databinding.ActivityProductDetailBinding
+import com.mobiquity.datamodel.Product
 import com.mobiquity.productlist.ProductListViewModel
 import javax.inject.Inject
 
@@ -34,5 +35,6 @@ class ProductDetailActivity:BaseActivity<ActivityProductDetailBinding,ProductDet
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.setNavigator(this)
+        mViewModel.setProduct(intent.getParcelableExtra<Product>("product"))
     }
 }

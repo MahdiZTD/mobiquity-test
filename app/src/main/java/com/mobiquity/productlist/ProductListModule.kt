@@ -5,6 +5,8 @@ import com.mobiquity.di.ViewModelProviderFactory
 import com.mobiquity.network.ApiHelper
 import com.mobiquity.network.ApiHelperImp
 import com.mobiquity.productlist.adpter.ProductListAdapter
+import com.mobiquity.utils.AppSchedulerProvider
+import com.mobiquity.utils.SchedulersProvider
 import dagger.Module
 import dagger.Provides
 
@@ -21,12 +23,15 @@ class ProductListModule {
         ViewModelProviderFactory(productListViewModel)
 
     @Provides
-    fun provideProductListViewModel(apiHelper: ApiHelper): ProductListViewModel = ProductListViewModel(apiHelper)
+    fun provideProductListViewModel(apiHelper: ApiHelper,schedulersProvider: SchedulersProvider): ProductListViewModel = ProductListViewModel(apiHelper,schedulersProvider)
 
     @Provides
     fun provideApiHelper():ApiHelper = ApiHelperImp()
 
     @Provides
     fun provideAdapter():ProductListAdapter = ProductListAdapter(arrayListOf())
+
+    @Provides
+    fun provideSchedulerProvider():SchedulersProvider = AppSchedulerProvider()
 
 }
