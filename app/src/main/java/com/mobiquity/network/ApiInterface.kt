@@ -6,8 +6,9 @@ import retrofit2.http.GET
 
 
 /**
- * Created by Mahdi_ZareTahghighDoost(ZTD)
- *  on 1/22/2019.
+ * Created by Mahdi Zare Tahghigh Doost on 3/3/2020.
+ * SnappQ
+ * mahdiZTD@gmail.com
  */
 interface ApiInterface {
 

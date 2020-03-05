@@ -8,8 +8,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * Created by Mahdi_ZareTahghighDoost(ZTD)
- *  on 1/22/2019.
+ * Created by Mahdi Zare Tahghigh Doost on 3/3/2020.
+ * SnappQ
+ * mahdiZTD@gmail.com
  */
 class ApiRepository {
 
